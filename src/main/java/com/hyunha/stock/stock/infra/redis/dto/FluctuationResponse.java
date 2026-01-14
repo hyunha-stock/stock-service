@@ -1,6 +1,7 @@
 package com.hyunha.stock.stock.infra.redis.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.hyunha.stock.stock.domain.StockSearch;
 import lombok.Data;
 
 import java.util.List;

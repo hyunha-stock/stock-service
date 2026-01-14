@@ -1,7 +1,7 @@
 package com.hyunha.stock.stock.infra.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hyunha.stock.stock.application.TradeRankingCacheReader;
+import com.hyunha.stock.stock.domain.port.out.TradeRankingCacheReader;
 import com.hyunha.stock.stock.infra.redis.dto.SymbolFeature;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

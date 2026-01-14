@@ -3,6 +3,8 @@ package com.hyunha.stock.stock.application;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hyunha.stock.kis.infra.KisClient;
 import com.hyunha.stock.kis.infra.dto.DomesticStockPriceResponse;
+import com.hyunha.stock.stock.domain.port.out.CandleCacheReader;
+import com.hyunha.stock.stock.domain.port.out.CandleCacheWriter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

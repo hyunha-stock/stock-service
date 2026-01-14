@@ -2,7 +2,7 @@ package com.hyunha.stock.stock.infra.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hyunha.stock.kis.infra.dto.DomesticStockPriceResponse;
-import com.hyunha.stock.stock.application.CandleCacheReader;
+import com.hyunha.stock.stock.domain.port.out.CandleCacheReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;

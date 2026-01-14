@@ -1,16 +1,13 @@
 package com.hyunha.stock.stock.infra.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hyunha.stock.stock.application.FluctuationCacheReader;
-import com.hyunha.stock.stock.application.IndexPriceCacheReader;
-import com.hyunha.stock.stock.infra.redis.dto.FluctuationResponse;
+import com.hyunha.stock.stock.domain.port.out.IndexPriceCacheReader;
 import com.hyunha.stock.stock.infra.redis.dto.IndexPriceResponse;
 import com.hyunha.stock.stock.infra.redis.enums.RedisKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor

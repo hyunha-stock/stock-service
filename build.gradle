@@ -46,10 +46,13 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	runtimeOnly 'org.postgresql:postgresql'
 }
 
 dependencyManagement {
@@ -73,7 +76,7 @@ jib {
 
 	to {
 		image = "docker.io/nohyunha95/stock-service"
-		tags = ["0.0.6", "latest"]
+		tags = ["0.0.8", "latest"]
 	}
 
 	container {

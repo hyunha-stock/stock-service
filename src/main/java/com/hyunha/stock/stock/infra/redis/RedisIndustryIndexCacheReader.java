@@ -1,9 +1,8 @@
 package com.hyunha.stock.stock.infra.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hyunha.stock.stock.application.IndustryIndexCacheReader;
+import com.hyunha.stock.stock.domain.port.out.IndustryIndexCacheReader;
 import com.hyunha.stock.stock.infra.redis.dto.IndustryIndexPriceResponse;
-import com.hyunha.stock.stock.infra.redis.dto.SymbolFeature;
 import com.hyunha.stock.stock.infra.redis.enums.RedisKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;

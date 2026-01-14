@@ -1,5 +1,6 @@
 package com.hyunha.stock.stock.application;
 
+import com.hyunha.stock.stock.domain.port.out.TradeRankingCacheReader;
 import com.hyunha.stock.stock.infra.redis.dto.SymbolFeature;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
