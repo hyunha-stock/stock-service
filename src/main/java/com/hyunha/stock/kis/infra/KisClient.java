@@ -62,6 +62,11 @@ public class KisClient {
                 .body(InvestmentOpinionApiResponse.class);
     }
 
+    /**
+     * https://apiportal.koreainvestment.com/apiservice-apiservice?/uapi/domestic-stock/v1/quotations/investor-trend-estimate
+     * 종목별 외인기관 추정가집계[v1_국내주식-046]
+     */
+
     private @NonNull Consumer<HttpHeaders> getCommonHttpHeaders(String transactionId) {
         return httpHeaders -> {
             httpHeaders.setBearerAuth(tokenProvider.getAccessToken());

@@ -15,7 +15,7 @@ public interface StockRepository extends JpaRepository<Stock, StockMasterId> {
             value = """
                     select market, symbol, name_ko
                     from stock_master
-                    where market = 'KOPIS' and
+                    where market = 'KOSPI' and
                           (symbol like '%' || :q || '%' or name_ko ilike '%' || :q || '%')
                     order by
                       greatest(

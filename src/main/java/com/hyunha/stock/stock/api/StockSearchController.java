@@ -25,7 +25,7 @@ public class StockSearchController {
     }
 
     @GetMapping
-    public List<GetSearchResponse> search(@RequestParam(required = false) String query) {
+    public List<GetSearchResponse> search(String query) {
         return stockSearchQueryService.search(query);
     }
 }

@@ -11,3 +11,9 @@ spring:
     config:
       username: ${SPRING_CLOUD_CONFIG_USERNAME}
       password: ${SPRING_CLOUD_CONFIG_PASSWORD}
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

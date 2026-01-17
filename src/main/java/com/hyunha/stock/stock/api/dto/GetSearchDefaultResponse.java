@@ -1,6 +1,5 @@
 package com.hyunha.stock.stock.api.dto;
 
-import com.hyunha.stock.stock.domain.StockSearch;
 import com.hyunha.stock.stock.infra.redis.dto.StockSearchItem;
 
 import java.util.List;
