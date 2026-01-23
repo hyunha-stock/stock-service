@@ -47,7 +47,7 @@ jobs:
         repository: momenta-kr/gitops
         token: ${{ secrets.GITOPS_REPO_TOKEN }}
         ref: main
-        path: stock-service
+        path: gitops
 
     - name: Install yq
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -61,11 +61,11 @@ jobs:
       working-directory: gitops
       run: |
         echo "Updating image.tag to ${TAG}"
-        yq -i '.image.tag = strenv(TAG)' charts/stock-service/values-prod.yml
+        yq -i '.image.tag = strenv(TAG)' stock-service/values-prod.yml
 
     - name: Commit & push GitOps changes
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      working-directory: stock-service
+      working-directory: gitops
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
