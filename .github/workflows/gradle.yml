@@ -1,6 +1,6 @@
 name: Java CI with Gradle
 
-on:  
+on:
   push:
     branches: [ "main" ]
   pull_request:
@@ -15,7 +15,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    
+
     - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
@@ -34,11 +34,11 @@ jobs:
     - name: Build & Push with Jib
       run: |
         TAG=${GITHUB_SHA::7}
+        echo "TAG=$TAG" >> $GITHUB_ENV
         ./gradlew jib --no-daemon --stacktrace -Djib.to.tags=${TAG},latest
 
     # ----------------------------
-    # GitOps repo bump (push only on main push)
-    # PR에서는 다른 레포 push하지 않도록 가드
+    # GitOps repo bump (main push only)
     # ----------------------------
     - name: Checkout GitOps repository
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -48,6 +48,7 @@ jobs:
         token: ${{ secrets.GITOPS_REPO_TOKEN }}
         ref: main
         path: gitops
+        persist-credentials: false
 
     - name: Install yq
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -56,21 +57,24 @@ jobs:
         sudo chmod +x /usr/local/bin/yq
         yq --version
 
-    - name: Update image tag in values.yaml
+    - name: Update image tag in values-prod.yml
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       working-directory: gitops
       run: |
-        echo "Updating image.tag to ${TAG}"
         yq -i '.image.tag = strenv(TAG)' stock-service/values-prod.yml
 
     - name: Commit & push GitOps changes
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       working-directory: gitops
-
+      env:
+        GITOPS_TOKEN: ${{ secrets.GITOPS_REPO_TOKEN }}
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
 
         git add stock-service/values-prod.yml
         git commit -m "chore(prod): bump stock-service image tag to ${TAG}" || exit 0
-        git push
+
+        # ✅ 토큰으로 push 강제
+        git remote set-url origin https://x-access-token:${GITOPS_TOKEN}@github.com/momenta-kr/gitops.git
+        git push origin main
