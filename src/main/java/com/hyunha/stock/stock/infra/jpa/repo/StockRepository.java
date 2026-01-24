@@ -31,4 +31,6 @@ public interface StockRepository extends JpaRepository<Stock, StockMasterId> {
             nativeQuery = true
     )
     List<StockSearchDto> searchKopisBySymbolOrNameKo(@Param("q") String query);
+
+    List<Stock> findByIdIn(List<StockMasterId> stockMasterIds);
 }
