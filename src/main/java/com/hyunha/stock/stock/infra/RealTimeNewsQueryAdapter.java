@@ -31,13 +31,11 @@ public class RealTimeNewsQueryAdapter implements RealTimeNewsQueryPort {
         List<NewsDocument> newsDocuments = newsEsRepository.findByOrderByCrawledAtDesc(Pageable.ofSize(2000));
         List<StockMasterId> stockMasterIds = new ArrayList<>(newsDocuments.stream()
                 .map(NewsDocument::getSymbol)
-                .map(stockCode -> stockCode.split("\\.")[0])
                 .map(StockMasterId::kospi)
                 .toList());
 
         newsDocuments.stream()
                 .map(NewsDocument::getSymbol)
-                .map(stockCode -> stockCode.split("\\.")[0])
                 .map(StockMasterId::kosdaq)
                 .forEach(stockMasterIds::add);
 
