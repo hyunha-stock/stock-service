@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface NewsEsRepository extends ElasticsearchRepository<NewsDocument, String> {
     // recent 100 news
-    List<NewsDocument> findByOrderByCrawledAtDesc(Pageable pageable);
+    List<NewsDocument> findByOrderByPublishedAt(Pageable pageable);
 
 }
