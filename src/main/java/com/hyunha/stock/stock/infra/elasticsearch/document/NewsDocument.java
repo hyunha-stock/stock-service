@@ -65,16 +65,13 @@ public class NewsDocument {
     @Field(type = FieldType.Keyword)
     private String query;
 
-    @Field(type = FieldType.Keyword)
-    private String relatedStockCode;
-
     @MultiField(
-            mainField = @Field(type = FieldType.Text, name = "relatedTickers"),
+            mainField = @Field(type = FieldType.Text, name = "relatedStockCode"),
             otherFields = {
                     @InnerField(suffix = "keyword", type = FieldType.Keyword, ignoreAbove = 256)
             }
     )
-    private List<String> relatedTickers;
+    private List<String> relatedStockCode;
 
     @MultiField(
             mainField = @Field(type = FieldType.Text, analyzer = "ko_nori", name = "safeBrief"),

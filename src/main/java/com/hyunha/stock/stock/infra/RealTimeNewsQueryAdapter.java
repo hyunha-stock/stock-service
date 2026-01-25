@@ -28,24 +28,22 @@ public class RealTimeNewsQueryAdapter implements RealTimeNewsQueryPort {
     private final StockRepository stockRepository;
 
     public List<GetRealTimeNewsResponse> getRealTimeNews() {
-        List<NewsDocument> newsDocuments = newsEsRepository.findByOrderByCrawledAtDesc(Pageable.ofSize(2000));
+        List<NewsDocument> newsDocuments = newsEsRepository.findByOrderByPublishedAtDesc(Pageable.ofSize(2000));
         List<StockMasterId> stockMasterIds = new ArrayList<>(newsDocuments.stream()
                 .map(NewsDocument::getSymbol)
-                .map(stockCode -> stockCode.split("\\.")[0])
                 .map(StockMasterId::kospi)
                 .toList());
 
         newsDocuments.stream()
                 .map(NewsDocument::getSymbol)
-                .map(stockCode -> stockCode.split("\\.")[0])
                 .map(StockMasterId::kosdaq)
                 .forEach(stockMasterIds::add);
 
         newsDocuments.stream()
-                .filter(newsDocument -> newsDocument.getRelatedTickers() != null)
+                .filter(newsDocument -> newsDocument.getRelatedStockCode() != null)
                 .map(newsDocument -> {
-                    List<StockMasterId> stockMasterIds1 = newsDocument.getRelatedTickers().stream().map(StockMasterId::kospi).toList();
-                    List<StockMasterId> stockMasterIds2 = newsDocument.getRelatedTickers().stream().map(StockMasterId::kosdaq).toList();
+                    List<StockMasterId> stockMasterIds1 = newsDocument.getRelatedStockCode().stream().map(StockMasterId::kospi).toList();
+                    List<StockMasterId> stockMasterIds2 = newsDocument.getRelatedStockCode().stream().map(StockMasterId::kosdaq).toList();
                     return List.of(stockMasterIds1, stockMasterIds2);
                 })
                 .flatMap(Collection::stream)

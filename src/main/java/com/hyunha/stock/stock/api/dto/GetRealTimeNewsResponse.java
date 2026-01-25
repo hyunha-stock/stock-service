@@ -38,14 +38,16 @@ public record GetRealTimeNewsResponse(
                 newsDocument.getSafeBrief(),
                 newsDocument.getSentiment(),
                 newsDocument.getCategory(),
-                CollectionUtils.isEmpty(newsDocument.getRelatedTickers()) ? List.of() : newsDocument.getRelatedTickers().stream()
+                CollectionUtils.isEmpty(newsDocument.getRelatedStockCode()) ? List.of() : newsDocument.getRelatedStockCode().stream()
+                        .filter(relatedTicker -> {
+                            String stockCode = relatedTicker.split("\\.")[0];
+                            Stock stock = stockByStockCode.get(stockCode);
+                            return stock != null;
+                        })
                         .map(relatedTicker -> {
-                            Stock stock = stockByStockCode.get(relatedTicker);
-                            if (stock != null) {
-                                return new RelatedStock(relatedTicker, stock.getNameKo());
-                            } else {
-                                return new RelatedStock(relatedTicker, "");
-                            }
+                            String stockCode = relatedTicker.split("\\.")[0];
+                            Stock stock = stockByStockCode.get(stockCode);
+                            return new RelatedStock(stockCode, stock.getNameKo());
                         }).toList()
 
 
