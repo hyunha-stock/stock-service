@@ -4,9 +4,6 @@ import com.hyunha.stock.stock.infra.elasticsearch.document.NewsDocument;
 import com.hyunha.stock.stock.infra.jpa.entity.Stock;
 import org.springframework.util.CollectionUtils;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +35,7 @@ public record GetRealTimeNewsResponse(
                 newsDocument.getSafeBrief(),
                 newsDocument.getSentiment(),
                 newsDocument.getCategory(),
-                CollectionUtils.isEmpty(newsDocument.getRelatedStockCode()) ? List.of() : newsDocument.getRelatedStockCode().stream()
+                CollectionUtils.isEmpty(newsDocument.getRelatedStockCodes()) ? List.of() : newsDocument.getRelatedStockCodes().stream()
                         .filter(relatedTicker -> {
                             String stockCode = relatedTicker.split("\\.")[0];
                             Stock stock = stockByStockCode.get(stockCode);

@@ -5,8 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.*;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.util.List;
 
 @Getter
@@ -66,12 +64,12 @@ public class NewsDocument {
     private String query;
 
     @MultiField(
-            mainField = @Field(type = FieldType.Text, name = "relatedStockCode"),
+            mainField = @Field(type = FieldType.Text, name = "relatedStockCodes"),
             otherFields = {
                     @InnerField(suffix = "keyword", type = FieldType.Keyword, ignoreAbove = 256)
             }
     )
-    private List<String> relatedStockCode;
+    private List<String> relatedStockCodes;
 
     @MultiField(
             mainField = @Field(type = FieldType.Text, analyzer = "ko_nori", name = "safeBrief"),

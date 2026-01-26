@@ -29,7 +29,7 @@ public class RealTimeNewsQueryAdapter implements RealTimeNewsQueryPort {
     private final StockRepository stockRepository;
 
     public List<GetRealTimeNewsResponse> getRealTimeNews() {
-        List<NewsDocument> newsDocuments = newsEsRepository.findByOrderByPublishedAtDesc(Pageable.ofSize(2000));
+        List<NewsDocument> newsDocuments = newsEsRepository.findByOrderByPublishedAtDesc(Pageable.ofSize(500));
         List<StockMasterId> stockMasterIds = new ArrayList<>(newsDocuments.stream()
                 .map(NewsDocument::getSymbol)
                 .filter(StringUtils::isNotBlank)
