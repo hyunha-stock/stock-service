@@ -21,6 +21,7 @@ public class ThemeQueryAdapter implements ThemeQueryPort {
     public List<GetThemesResponse> getThemes() {
         Map<Theme, Long> countByTheme = themeMemberRepository.findAllWithTheme()
                 .stream()
+                .limit(10)
                 .collect(Collectors.groupingBy(ThemeMember::getTheme, Collectors.counting()));
 
         return countByTheme.entrySet().stream()

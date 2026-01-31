@@ -1,9 +1,9 @@
 package com.hyunha.stock.stock.infra;
 
-import com.hyunha.stock.kis.infra.KisClient;
 import com.hyunha.stock.kis.infra.dto.InvestmentOpinionApiResponse;
 import com.hyunha.stock.stock.api.dto.GetInvestmentOpinionResponse;
 import com.hyunha.stock.stock.domain.port.out.StockQueryPort;
+import com.hyunha.stock.stock.infra.kis.KisClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
