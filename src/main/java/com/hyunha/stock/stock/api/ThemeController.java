@@ -1,6 +1,7 @@
 package com.hyunha.stock.stock.api;
 
-import com.hyunha.stock.stock.api.dto.GetThemesResponse;
+import com.hyunha.stock.stock.api.dto.GetThemeResponse;
+import com.hyunha.stock.stock.infra.jpa.dto.ThemeResponse;
 import com.hyunha.stock.stock.application.ThemeQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ public class ThemeController {
     private final ThemeQueryService themeQueryService;
 
     @GetMapping
-    public List<GetThemesResponse> getThemes() {
+    public List<GetThemeResponse> getThemes() {
         return themeQueryService.getThemes();
     }
 }

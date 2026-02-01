@@ -1,4 +1,4 @@
-package com.hyunha.stock.stock.api.dto;
+package com.hyunha.stock.stock.infra.redis.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

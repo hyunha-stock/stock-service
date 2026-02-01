@@ -1,8 +1,9 @@
 package com.hyunha.stock.stock.api.dto;
 
-public record GetThemesResponse(
+public record GetThemeResponse(
         String themeCode,
         String themeName,
-        long stockCount
+        long stockCount,
+        double averageChangeRate
 ) {
 }
