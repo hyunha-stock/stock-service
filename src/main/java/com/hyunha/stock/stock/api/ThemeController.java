@@ -19,6 +19,5 @@ public class ThemeController {
     @GetMapping
     public List<GetThemesResponse> getThemes() {
         return themeQueryService.getThemes();
-
     }
 }

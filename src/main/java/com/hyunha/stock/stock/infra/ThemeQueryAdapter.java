@@ -24,6 +24,9 @@ public class ThemeQueryAdapter implements ThemeQueryPort {
                 .limit(10)
                 .collect(Collectors.groupingBy(ThemeMember::getTheme, Collectors.counting()));
 
+
+
+
         return countByTheme.entrySet().stream()
                 .map(entry -> new GetThemesResponse(
                         entry.getKey().getCode(),

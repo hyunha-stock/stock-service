@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 
 @FeignClient(name = "kis-gateway")
 public interface KisClient {
+
+
     @GetMapping("/api/kis/v1/candles")
     CandlesResponse fetchCandles(
             @RequestParam String excd,
