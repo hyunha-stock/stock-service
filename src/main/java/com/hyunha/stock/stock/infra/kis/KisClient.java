@@ -24,8 +24,7 @@ public interface KisClient {
 
     @GetMapping("/api/kis/v1/investment-opinion")
     InvestmentOpinionApiResponse fetchInvestmentOpinion(
-            @RequestParam String symbol,
-            @RequestParam LocalDateTime now
+            @RequestParam String symbol
     );
 
     @GetMapping("/api/kis/v1/domestic-stock-period-prices")
