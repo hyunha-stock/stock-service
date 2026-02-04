@@ -18,7 +18,7 @@ public class StockQueryAdapter implements StockQueryPort {
 
     @Override
     public List<GetInvestmentOpinionResponse> getInvestmentOpinion(String symbol) {
-        InvestmentOpinionApiResponse response = kisClient.fetchInvestmentOpinion(symbol, LocalDateTime.now());
+        InvestmentOpinionApiResponse response = kisClient.fetchInvestmentOpinion(symbol);
         return GetInvestmentOpinionResponse.from(response.getItems());
     }
 }
