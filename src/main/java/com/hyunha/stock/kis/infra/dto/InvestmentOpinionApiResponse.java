@@ -2,27 +2,17 @@ package com.hyunha.stock.kis.infra.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.hyunha.stock.stock.infra.redis.dto.BaseResponse;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true) // 응답에 추가 필드가 와도 무시
-public class InvestmentOpinionApiResponse {
-
-    @JsonProperty("rt_cd")
-    private String resultCode; // 성공/실패 여부
-
-    @JsonProperty("msg_cd")
-    private String messageCode; // 응답코드
-
-    @JsonProperty("msg1")
-    private String message; // 응답메세지
+public class InvestmentOpinionApiResponse extends BaseResponse {
 
     @JsonProperty("output")
     private List<InvestmentOpinionItem> items; // 응답상세(Object Array)
-
-
 
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
