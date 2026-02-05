@@ -1,12 +1,15 @@
 package com.hyunha.stock.stock.application;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hyunha.stock.stock.api.dto.GetDomesticStockCurrentPriceOutput;
 import com.hyunha.stock.stock.api.dto.GetInvestmentOpinionResponse;
+import com.hyunha.stock.stock.api.dto.GetVolumeRankingResponse;
 import com.hyunha.stock.stock.domain.port.out.StockCacheReader;
 import com.hyunha.stock.stock.domain.port.out.StockCacheWriter;
 import com.hyunha.stock.stock.domain.port.out.StockQueryPort;
 import com.hyunha.stock.stock.infra.redis.RedisKeyFactory;
 import com.hyunha.stock.stock.infra.redis.dto.DomesticStockCurrentPriceResponse;
+import com.hyunha.stock.stock.infra.redis.dto.VolumeRankResponse;
 import com.hyunha.stock.stock.infra.redis.enums.RedisKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,5 +38,22 @@ public class StockQueryService {
         if (domesticStockCurrentPrices.isEmpty()) return null;
 
         return GetDomesticStockCurrentPriceOutput.from(domesticStockCurrentPrices.getFirst().getOutput());
+    }
+
+    public List<GetVolumeRankingResponse> getVolumeRankings() throws JsonProcessingException {
+        VolumeRankResponse volumeRanking = stockCacheReader.getVolumeRanking();
+
+        if (volumeRanking == null) return List.of();
+
+        return volumeRanking.getOutputList().stream()
+                .map(output -> new GetVolumeRankingResponse(
+                        output.getShortSymbolCode(),
+                        output.getHtsKoreanName(),
+                        output.getDataRank(),
+                        output.getCurrentPrice(),
+                        output.getPrevDayDiff(),
+                        output.getPrevDayChangeRate()
+                ))
+                .toList();
     }
 }

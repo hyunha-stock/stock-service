@@ -11,7 +11,8 @@ public enum RedisKey {
     TOP_GAINERS("stock:top:gainers", Duration.ofDays(1)),
     TOP_LOSERS("stock:top:losers", Duration.ofDays(1)),
     INDEX_PRICE("stock:index:price", Duration.ofDays(1)),
-    STOCK_INFO("stock:info", Duration.ofDays(1))
+    STOCK_INFO("stock:info", Duration.ofDays(1)),
+    VOLUME_RANK("stock:volume:rank", Duration.ofDays(30)),
     ;
     private String key;
     private Duration ttl;

@@ -6,6 +6,8 @@ import com.hyunha.stock.kis.infra.dto.DomesticStockPriceResponse;
 import com.hyunha.stock.stock.api.dto.GetInvestmentOpinionResponse;
 import com.hyunha.stock.stock.domain.port.out.StockCacheReader;
 import com.hyunha.stock.stock.infra.redis.dto.DomesticStockCurrentPriceResponse;
+import com.hyunha.stock.stock.infra.redis.dto.VolumeRankResponse;
+import com.hyunha.stock.stock.infra.redis.enums.RedisKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
@@ -43,5 +45,11 @@ public class RedisStockCacheReader implements StockCacheReader {
                     }
                 })
                 .toList();
+    }
+
+    @Override
+    public VolumeRankResponse getVolumeRanking() throws JsonProcessingException {
+        String json = stringRedisTemplate.opsForValue().get(RedisKey.VOLUME_RANK.getKey());
+        return objectMapper.readValue(json, VolumeRankResponse.class);
     }
 }
